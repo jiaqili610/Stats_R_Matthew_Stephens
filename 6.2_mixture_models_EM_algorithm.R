@@ -106,3 +106,5 @@ ee <- mixture.EM(w.init = c(0.5, 0.5), L)
 
 
 print(paste("Estimate = (", round(ee[[1]][1], 2), ",", round(ee[[1]][2], 2), ")", sep="" ))
+
+plot(ee[[2]] , ylab = 'incomplete log-likelihood' , xlab='iteration')
