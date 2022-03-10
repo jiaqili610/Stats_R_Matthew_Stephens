@@ -25,5 +25,6 @@ sigma.true = c(1.5, 2)
 #   determine z_i
 Z = rbinom(500,1,0.75)
 
-# sample from mixture model
+# sample from mixture model 111
+
 x <- rnorm(10000, mean=mu.true[Z+1], sd=sigma.true[Z+1])
