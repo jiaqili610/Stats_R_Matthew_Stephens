@@ -1,6 +1,10 @@
 # Comparing two models with a likelihood ratio
 
 # compute the likelihood and likelihood ratio. for Model 1 and Model 2
+rm(list = ls()) 
+
+
+
 
 # data we observe
 x = c(1, 0, 1 , 0, 0 ,1)
@@ -28,4 +32,24 @@ print(LR)
 ##################################################################
 # SIMULATION - EXERCISE
 ##################################################################
+seed <- 10
+set.seed(seed)
+
+simu.size <- 1000
+
+
+binomg <- function(x) {
+        rbinom(simu.size,1, x)
+}
+        
+simulate_S <- sapply(fS, binomg)
+simulate_F <- sapply(fF, binomg)
+
+
+# calculate likelihood
+Likelihood.S.forSmodel = apply(simulate_S, 1, function(x) {L(fS, x)})
+Likelihood.S.forFmodel = apply(simulate_S, 1, function(x) {L(fF, x)})
+
+Likelihood.Ratio = Likelihood.S.forSmodel / Likelihood.S.forFmodel
+
 
