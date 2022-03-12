@@ -46,10 +46,42 @@ simulate_S <- sapply(fS, binomg)
 simulate_F <- sapply(fF, binomg)
 
 
-# calculate likelihood
+# calculate likelihood ratio - for S simulated data
 Likelihood.S.forSmodel = apply(simulate_S, 1, function(x) {L(fS, x)})
 Likelihood.S.forFmodel = apply(simulate_S, 1, function(x) {L(fF, x)})
 
-Likelihood.Ratio = Likelihood.S.forSmodel / Likelihood.S.forFmodel
+Likelihood.Ratio.S = Likelihood.S.forSmodel / Likelihood.S.forFmodel
+
+mean(Likelihood.Ratio.S)
 
 
+# calculate likelihood ratio - for F simulated data
+Likelihood.F.forSmodel = apply(simulate_F, 1, function(x) {L(fS, x)})
+Likelihood.F.forFmodel = apply(simulate_F, 1, function(x) {L(fF, x)})
+
+Likelihood.Ratio.F = Likelihood.F.forFmodel / Likelihood.F.forSmodel
+mean(Likelihood.Ratio.F)
+
+
+
+lc <- 2
+
+
+# function to compute misrate according to lc
+misrate = function(lc){
+        Misclassification.S <- Likelihood.Ratio.S <= lc
+        Misclassification.F <- Likelihood.Ratio.F <= lc
+        (mean(Misclassification.S) + mean(Misclassification.F))/2
+}
+
+misrate(2)
+
+
+
+
+# plot the misrate and c range
+c <- seq(0, 100, by = 0.01)
+
+misrateseq = sapply(c, misrate)
+
+plot(c, misrateseq)
