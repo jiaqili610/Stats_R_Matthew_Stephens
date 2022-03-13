@@ -26,5 +26,5 @@ sample_simulation <- sapply(p0_mat, binomg)
 
 mle_p <- apply(sample_simulation, 2, sum)
 
-hist(mle_p/100)
-
+hist(mle_p/100, freq = F)
+curve(dnorm(x, mean=0.4, sd= sqrt((0.4*(1-0.4)/100))), add=T)
