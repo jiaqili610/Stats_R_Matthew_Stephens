@@ -35,4 +35,6 @@ LL = function(q){
 
 plot(q, LL(q)-LL(0.3), ylab = "log L(q) - Log l(0.3)", xlab = "q", type = "l", ylim=c(-10,0))
 ?ylim
+
+
      
